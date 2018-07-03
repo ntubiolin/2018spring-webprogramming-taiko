@@ -7,12 +7,12 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactAudioPlayer from 'react-audio-player';
 import { Throttle } from 'react-throttle';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
+  // BrowserRouter as Router,
+  // Route,
+  // Link,
   Redirect,
-  withRouter
-} from "react-router-dom";
+  // withRouter,
+} from 'react-router-dom';
 
 function throttle(callback, limit) {
   let wait = false;
@@ -42,14 +42,14 @@ class Carousel extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', throttle(this.handleKeyPress, 250), false);
+    document.addEventListener('keydown', throttle(this.handleKeyPress, 400), false);
     fetch('http://webdemo.nctu.me:5000/songList')
       .then(response => response.json())
       .then(json => this.setState({ items: json }));
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', throttle(this.handleKeyPress, 250), false);
+    document.removeEventListener('keydown', throttle(this.handleKeyPress, 400), false);
   }
 
   // generateItems() {
@@ -70,11 +70,11 @@ class Carousel extends Component {
   // }
 
   listItems() {
-    const items = []; // 最後要render的items
-    console.log(this.state.active);
+    const items = [];
+    // console.log(this.state.active);
     const totalSongs = (this.state.items.length > 11) ? 11 : this.state.items.length;
     const startLevel = (totalSongs > 11) ? -5 : this.state.active - Math.floor((totalSongs - 1) / 2);
-    console.log('list from ' + startLevel + 'to ' + (startLevel + totalSongs - 1));
+    // console.log('list from ' + startLevel + 'to ' + (startLevel + totalSongs - 1));
 
     let level;
     for (let i = startLevel; i < startLevel + totalSongs; i += 1) {
@@ -93,6 +93,8 @@ class Carousel extends Component {
   handleKeyPress(event) {
     console.log(event.key);
     if (event.key === 'd') {
+      const ka = document.getElementById('audio-ka');
+      ka.play();
       let newActive = this.state.active;
       newActive -= 1;
       const { length } = this.state.items;
@@ -101,6 +103,8 @@ class Carousel extends Component {
         direction: 'left',
       });
     } else if (event.key === 'k') {
+      const ka = document.getElementById('audio-ka');
+      ka.play();
       const { active } = this.state;
       const { length } = this.state.items;
       this.setState({
@@ -108,11 +112,15 @@ class Carousel extends Component {
         direction: 'right',
       });
     } else if (event.key === 'f' || event.key === 'j') {
-      this.setState({ redirect: true });
+      const don = document.getElementById('audio-don');
+      don.play();
+      setTimeout(() => this.setState({ redirect: true }), 1000);
     }
   }
 
   moveLeft() {
+    const ka = document.getElementById('audio-ka');
+    ka.play();
     let newActive = this.state.active;
     newActive -= 1;
     const { length } = this.state.items;
@@ -123,6 +131,8 @@ class Carousel extends Component {
   }
 
   moveRight() {
+    const ka = document.getElementById('audio-ka');
+    ka.play();
     const { active } = this.state;
     const { length } = this.state.items;
     this.setState({
@@ -132,38 +142,41 @@ class Carousel extends Component {
   }
 
   render() {
-    const redirect = this.state.redirect;
-
+    const { redirect } = this.state;
     if (redirect) {
-      return (<Redirect to={{
-        pathname: '/game',
-        package: { 
-          userName: this.props.user.userName,
-          sessionKey: this.props.user.sessionKey,
-          songID: this.state.items[this.state.active]._id,
-          songFile: this.state.items[this.state.active].file,
-          songChart: this.state.items[this.state.active].chart,
-        }
-      }}/>);
-    } else { 
       return (
-        <div id="carousel" className="noselect">
-          <Throttle time="250" handler="onClick">
-            <div role="button" tabIndex="0" className="arrow arrow-left" onClick={this.leftClick}>
-              &#9668;
-            </div>
-          </Throttle>
-          <ReactCSSTransitionGroup transitionName={this.state.direction}>
-            {this.listItems()}
-          </ReactCSSTransitionGroup>
-          <Throttle time="250" handler="onClick">
-            <div role="button" tabIndex="0" className="arrow arrow-right" onClick={this.rightClick}>
-              &#9658;
-            </div>
-          </Throttle>
-        </div>
+        <Redirect to={{
+          pathname: '/game',
+          package: {
+            userName: this.props.userName,
+            sessionKey: this.props.sessionKey,
+            songID: this.state.items[this.state.active]._id,
+            songFile: this.state.items[this.state.active].file,
+            songChart: this.state.items[this.state.active].chart,
+          },
+        }}
+        />
       );
     }
+    return (
+      <div id="carousel" className="noselect">
+        <ReactAudioPlayer src="ka.wav" id="audio-ka" />
+        <ReactAudioPlayer src="don.wav" id="audio-don" />
+        <Throttle time="400" handler="onClick">
+          <div role="button" tabIndex="0" className="arrow arrow-left" onClick={this.leftClick}>
+            &#9668;
+          </div>
+        </Throttle>
+        <ReactCSSTransitionGroup transitionName={this.state.direction} transitionEnter={false} transitionLeave={false}>
+          {this.listItems()}
+        </ReactCSSTransitionGroup>
+        <Throttle time="400" handler="onClick">
+          <div role="button" tabIndex="0" className="arrow arrow-right" onClick={this.rightClick}>
+            &#9658;
+          </div>
+        </Throttle>
+      </div>
+    );
   }
 }
 
@@ -183,7 +196,6 @@ function MyItem(props) {
       </div>
       {(props.level === 0 && props.desc.length > 0) ? <Description desc={props.desc} /> : '' }
       {(props.level === 0) ? <ReactAudioPlayer src="君の知らない物語.mp3" autoPlay /> : '' }
-      {(props.level === 0) ? <ReactAudioPlayer src="tak.wav" autoPlay /> : '' }
       {(props.level === 0) ? <Description desc={props.item.course + props.item.file + props.item.level} /> : '' }
     </div>
   );

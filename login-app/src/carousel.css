@@ -357,6 +357,7 @@ body {
 	font-size: 1.5rem;
 	padding-right: 2rem;
 	padding-left: 1rem;
+	white-space: nowrap;
 }
 
 .stroke-white {
