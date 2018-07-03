@@ -37,7 +37,7 @@ class Login extends Component {
   }
   responseGoogle = (response)=>{
     console.log(response.profileObj);
-    fetch("http://localhost:5000/registration/", {
+    fetch("http://webdemo.nctu.me:5000/registration/", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -76,13 +76,13 @@ class Login extends Component {
   }
   render() {
     var sectionStyle = {
-      backgroundImage: `url(${Background})`
+      // backgroundImage: `url(${Background})`
     };
     const redirect = this.state.redirect;
 
     if (redirect) {
       return (<Redirect to={{
-        pathname: '/list',
+        pathname: '/menu',
         state: { userInfo: this.state }
       }}/>);
     }else{
