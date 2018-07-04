@@ -140,6 +140,7 @@ class SongSelection extends Component {
   render() {
     const userName = (this.props.location.state !== undefined) ? this.props.location.state.userInfo.userName : 'Not Logged In';
     const sessionKey = (this.props.location.state !== undefined) ? this.props.location.state.userInfo.sessionKey : 'No Key';
+    const userInfo = (this.props.location.state !== undefined) ? this.props.location.state.userInfo : '';
     return (
       <div className="menu-div">
         <div className="menu-top">
@@ -154,7 +155,7 @@ class SongSelection extends Component {
               曲をえらぶ
             </span>
           </div>
-          <Carousel items={this.state.songs} active={0} userName={userName} sessionKey={sessionKey} />
+          <Carousel items={this.state.songs} active={0} userInfo={userInfo} />
         </div>
         <Footer className="footer" name={userName} />
       </div>
