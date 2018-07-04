@@ -234,7 +234,7 @@ var getSongList = function (callback) {
       assert.equal(err, null);
       console.log(result);
       db.close();
-      result = result.sort(function (a, b) { return (a.level > b.level) ? 1 : ((b.level > a.level) ? -1 : 0); });
+      result = result.sort(function (a, b) { return (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0); });
       callback(result);
     });
   });
