@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 
 import Carousel from './Carosel';
-import avatar1 from './img/playerchar_p1_01.png';
-import avatar2 from './img/playerchar_p1_02.png';
+import avatar1 from './img/NTUDON2-01.png';
+import avatar2 from './img/NTUDON2-02-01.png';
 import './carousel.css';
 
 const tempsongs = [
@@ -82,8 +82,8 @@ function Footer(props) {
       <div className="footer-top">
         <div className="avatar-wrap">
           <div className="avatar">
-            <img id="avatar1" src={avatar1} alt="avatar1" />
-            <img id="avatar2" src={avatar2} alt="avatar2" />
+            <img id="avatar1" src={avatar1} alt="avatar1" width="288px" height="288px" />
+            <img id="avatar2" src={avatar2} alt="avatar2" width="288px" height="288px" />
           </div>
         </div>
         <div className="instructions">
