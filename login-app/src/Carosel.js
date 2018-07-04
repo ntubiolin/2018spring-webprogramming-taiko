@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment, max-len, prefer-template, no-console, jsx-a11y/click-events-have-key-events, no-underscore-dangle */
-var apiServerURL = 'http://webdemo.nctu.me:5000';
-apiServerURL = 'http://localhost:5000';
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactAudioPlayer from 'react-audio-player';
@@ -18,6 +16,8 @@ import Hard from './img/ico_difficulty_3.png';
 import Oni from './img/ico_difficulty_4.png';
 import goldCrown from './img/goldCrown.png';
 import silverCrown from './img/silverCrown.png';
+var apiServerURL = 'http://webdemo.nctu.me:5000';
+apiServerURL = 'http://localhost:5000';
 
 function throttle(callback, limit) {
   let wait = false;

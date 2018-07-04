@@ -9,6 +9,10 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+
+var apiServerURL = 'http://webdemo.nctu.me:5000';
+apiServerURL = 'http://localhost:5000';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +41,7 @@ class Login extends Component {
   }
   responseGoogle = (response)=>{
     console.log(response.profileObj);
-    fetch("http://webdemo.nctu.me:5000/registration/", {
+    fetch(apiServerURL + "/registration/", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

@@ -19,35 +19,104 @@ var generate_key = function () {
   sha.update(Math.random().toString());
   return sha.digest('hex');
 };
-var testSessionId = "181f6269ddec074bb8fd616a0783d5a0fd276706363c63808a7ea7ae1291c60c";
 
-var songList = [
-  { 
-    title: '「天国」序曲',
-    desc: 'オッフェンバック',
-    category: 1,
-    course: 'Oni', level: 10, file: 'dgfh.mp3',
-    chart: {
-      "offset": -3.6, "totalnotes": 797, "BPM": 200, "Notes": [{ "types": 1, "measure": 0, "time": 18 }]
-    },
+var data1 = require('./login-app/public/chart/10tai.json');
+var data2 = require('./login-app/public/chart/angel.json');
+var data3 = require('./login-app/public/chart/badapple.json');
+var data4 = require('./login-app/public/chart/clsmnk.json');
+var data5 = require('./login-app/public/chart/Gloria.json');
+var data6 = require('./login-app/public/chart/Iceon.json');
+var data7 = require('./login-app/public/chart/kim4ra.json');
+var data8 = require('./login-app/public/chart/mikuse.json');
+var data9 = require('./login-app/public/chart/natsumatsuri.json');
+var data10 = require('./login-app/public/chart/pastel.json');
+var data11 = require('./login-app/public/chart/shing2.json');
+var data12 = require('./login-app/public/chart/sotsuomeshiki.json');
+
+const tempsongs = [
+  {
+    title: '天体観測',
+    desc: '',
+    category: 2,
+    course: 'Hard', level: 4, file: 'music/10tai.ogg',
+    chart: data1,
   },
   {
-    title: '「地獄」序曲',
-    desc: 'オッフェンバック',
+    title: 'エンジェル ドリーム',
+    desc: '',
     category: 1,
-    course: 'Oni', level: 10, file: 'dgfh.mp3',
-    chart: {
-      "offset": -3.6, "totalnotes": 797, "BPM": 200, "Notes": [{ "types": 1, "measure": 0, "time": 18 }]
-    },
+    course: 'Easy', level: 3, file: 'music/angel.ogg',
+    chart: data2,
   },
   {
-    title: '「天国と地獄」序曲',
-    desc: 'オッフェンバック',
+    title: 'Bad Apple!! feat.nomico',
+    desc: '東方Projectアレンジ Alstroemeria Records',
+    category: 5,
+    course: 'Normal', level: 5, file: 'music/badapple.ogg',
+    chart: data3,
+  },
+  {
+    title: 'カレ・カノ・カノン',
+    desc: '',
+    category: 6,
+    course: 'Normal', level: 4, file: 'music/clsmnk.ogg',
+    chart: data4,
+  },
+  {
+    title: 'Gloria',
+    desc: 'K.Key',
     category: 1,
-    course: 'Oni', level: 10, file: 'dgfh.mp3',
-    chart: {
-      "offset": -3.6, "totalnotes": 797, "BPM": 200, "Notes": [{ "types": 1, "measure": 0, "time": 18 }]
-    },
+    course: 'Oni', level: 10, file: 'music/Gloria.ogg',
+    chart: data5,
+  },
+  {
+    title: '月に叢雲華に風 (Arranged: Iceon)',
+    desc: '東方Projectアレンジ 幽閉サテライト feat.senya',
+    category: 5,
+    course: 'Hard', level: 6, file: 'music/Iceon.ogg',
+    chart: data6,
+  },
+  {
+    title: '君の知らない物語',
+    desc: '「化物語」より',
+    category: 3,
+    course: 'Easy', level: 3, file: 'music/kim4ra.ogg',
+    chart: data7,
+  },
+  {
+    title: '千本桜',
+    desc: '黒うさP feat.初音ミク',
+    category: 4,
+    course: 'Easy', level: 3, file: 'music/mikuse.ogg',
+    chart: data8,
+  },
+  {
+    title: '夏祭り',
+    desc: '',
+    category: 2,
+    course: 'Normal', level: 2, file: 'music/natsumatsuri.ogg',
+    chart: data9,
+  },
+  {
+    title: 'パステル ドリーム',
+    desc: '',
+    category: 1,
+    course: 'Oni', level: 8, file: 'music/pastel.ogg',
+    chart: data10,
+  },
+  {
+    title: '紅蓮の弓矢',
+    desc: '「進撃の巨人」より',
+    category: 2,
+    course: 'Easy', level: 5, file: 'music/shing2.ogg',
+    chart: data11,
+  },
+  {
+    title: 'そつおめしき',
+    desc: 'feat.unmo',
+    category: 3,
+    course: 'Oni', level: 10, file: 'music/sotsuomeshiki.ogg',
+    chart: data12,
   },
 ]
 var initSongList = function (songList) {
@@ -72,7 +141,7 @@ var initSongList = function (songList) {
     
   });
 }
-initSongList(songList);
+initSongList(tempsongs);
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -112,16 +181,17 @@ app.post('/registration/', (req, res) => {
               email: response.data.email,
               name: response.data.name,
               photoURL: response.data.picture,
-              
             }
-            let initScores = songIds.map((id) => {
+            var initScore = songIds.map((id) => {
               return {
                 songId: id,
                 score: 0,
                 clear_state: 0
               }
             })
-            insertUsrOnce(db, userData, sessionId, initSocres, function () {
+            console.log(">>> Printing userData")
+            console.log(userData);
+            insertUsrOnce(db, userData, sessionId, initScore, function () {
               db.close();
             });
           });
@@ -151,7 +221,7 @@ app.post('/registration/', (req, res) => {
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-var insertUsrOnce = function (db, userData, sessionId, initScores, callback) {
+var insertUsrOnce = function (db, userData, sessionId, initScore, callback) {
   // Get the documents collection
   var collection = db.collection('documents');
   collection.update(
@@ -160,11 +230,10 @@ var insertUsrOnce = function (db, userData, sessionId, initScores, callback) {
     {
       $set: {
         joinedTime: now.format("YYYY-MM-DD HH:mm:ss Z"),
-        sessionId: sessionId,
-        
+        sessionId: sessionId
       },
-      $setOnInsert:{
-        scores: initScores
+      $setOnInsert: {
+        scores: initScore
       }
     },
     { upsert: true }, function (err, result) {
@@ -218,12 +287,12 @@ var filterUserScoresByName = function (idToken, callback) {
       { sessionId: idToken },
     ).toArray((err, result) => {
       assert.equal(err, null);
-      if(result[0].scores){
+      if(result[0]){
         console.log(result[0].scores);
         db.close();
         callback(result[0].scores);
       }else{
-        callback({status:"no query result!!"})
+        callback({status: sji })
       }
       
     });
@@ -272,8 +341,8 @@ var updateScoreById = (person_id, song_id, score, clear_state, callback)=> {
       function (err, result) {
         assert.equal(err, null);
         db.close();
-        console.log(">>> updateSCoreResult:");
-        console.log(result);
+        //console.log(">>> updateSCoreResult:");
+        //console.log(result);
         callback(result);
       });
   });
