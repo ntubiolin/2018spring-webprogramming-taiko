@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Login from './Login';
 import SongSelection from './SongSelection';
+import Taiko from './Taiko';
 
 import {
   BrowserRouter as Router,
@@ -15,7 +16,7 @@ const Root = ()=>(
     <Switch>
       <Route exact path="/" component={Login} />
       <Route path="/menu" render={ props => <SongSelection {...props}/>} />
-      <Route path="/game" render={ props => <Game {...props}/>} />      
+      <Route path="/game" render={ props => <Taiko {...props}/>} />      
     </Switch>
     
   </Router>

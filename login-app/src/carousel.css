@@ -327,13 +327,32 @@ body {
 	flex-direction: row-reverse;
 	justify-content: center;
 	align-items: flex-start;
-	overflow: hidden;
+
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, .3);
+}
+
+.crown {
+	position: absolute;
+	width: 35px;
+	height: 30px;
+	margin-top: -2.3rem;
+}
+
+.song-wrapper {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+	align-items: flex-start;
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
 }
 
 .song-name {
 	position: relative;
 	writing-mode: vertical-rl;
+	text-orientation: upright;
 	font-family: 'KanTingLiu';
 	color: white;
 	min-height: 50px;
@@ -346,6 +365,54 @@ body {
 	position: relative;
 	padding-top: 4rem;
 	font-size: 1.5rem;
+}
+
+.difficulty {
+	margin-right: 1.5rem;
+	margin-top: 4rem;
+	display: flex;
+	flex-direction: column;
+	width: 2rem;
+	border-radius: 1rem; 
+	align-items: center;
+
+	font-size: 1rem;
+
+	background-color: #FFAA03;
+}
+
+.diff-course {
+	margin-top: -30px;
+	color: black;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.diff-course span {
+	writing-mode: vertical-rl;
+	white-space: nowrap;
+	text-align: left;
+	padding-top: 0.1rem;
+	width: 1rem;
+	height: 5rem;
+}
+
+.diff-level {
+	display: flex;
+	flex-direction: column;	
+	padding-bottom: 1rem;
+	padding-top: 0.5rem;
+}
+
+.star {
+	text-shadow: 0px 0px 6px white;
+}
+
+.dot {
+	color: #FF8012;
+	font-size: 1.8rem;
+	line-height: 1rem;
 }
 
 .name {
@@ -394,28 +461,46 @@ body {
 	z-index: 49;
 }
 
-.category1 {
-	border: 6px outset #ffeea9;
+/* namco */
+.category1 { 
+	border: 6px outset #FFBC77;
 	/* background-color: #ffd522; */
-	background: linear-gradient(to bottom right, #ffd522, #ffeea9);
+	background: linear-gradient(to bottom right, #FF6200, #FFBC77);
 }
 
+/* jpop */
 .category2 {
-	border: 6px outset #ffeea6;
+	border: 6px outset #8DDCF6;
 	/* background-color: #ffa100; */
-	background: linear-gradient(to bottom right, #ffa100, #ffeea6);
+	background: linear-gradient(to bottom right, #0B9BCC, #8DDCF6);
 }
 
+/* anime */
 .category3 {
-	border: 6px outset #77cbe0;
+	border: 6px outset #FFED9D;
 	/* background-color: #079ac4; */
-	background: linear-gradient(to bottom right, #079ac4, #77cbe0);
+	background: linear-gradient(to bottom right, #FFA000, #FFED9D);
 }
 
+/* vocaloid */
 .category4 {
-	border: 6px outset #f9fdff;
+	border: 6px outset #FAFEFF;
 	/* background-color: #cadefa; */
-	background: linear-gradient(to bottom right, #cadefa, #f9fdff);
+	background: linear-gradient(to bottom right, #CCDFFE, #FAFEFF);
+}
+
+/* variety */
+.category5  {
+	border: 6px outset #E4F69C;
+	/* background-color: #cadefa; */
+	background: linear-gradient(to bottom right, #90D10A, #E4F69C);
+}
+
+/* classical */
+.category6 {
+	border: 6px outset #FFD76A;
+	/* background-color: #cadefa; */
+	background: linear-gradient(to bottom right, #E9A500, #FFD76A);	
 }
 
 .arrow-right {
