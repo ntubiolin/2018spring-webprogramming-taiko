@@ -246,14 +246,12 @@ function Crown(props) {
     return (
       <div className="crown">
         <img src={goldCrown} alt="goldCrown" />
-        {props.highScore}
       </div>
     );
   } else if (props.clearState === 1) {
     return (
       <div className="crown">
         <img src={silverCrown} alt="silverCrown" />
-        {props.highScore}
       </div>
     );
   }
