@@ -112,16 +112,16 @@ app.post('/registration/', (req, res) => {
               email: response.data.email,
               name: response.data.name,
               photoURL: response.data.picture,
-              scores: songIds.map((id)=>{
-                return{
-                  songId:id,
-                  score:0,
-                  clear_state:0
-                }
-              })
+              
             }
-            console.log(userData);
-            insertUsrOnce(db, userData, sessionId, function () {
+            let initScores = songIds.map((id) => {
+              return {
+                songId: id,
+                score: 0,
+                clear_state: 0
+              }
+            })
+            insertUsrOnce(db, userData, sessionId, initSocres, function () {
               db.close();
             });
           });
@@ -151,7 +151,7 @@ app.post('/registration/', (req, res) => {
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-var insertUsrOnce = function (db, userData, sessionId, callback) {
+var insertUsrOnce = function (db, userData, sessionId, initScores, callback) {
   // Get the documents collection
   var collection = db.collection('documents');
   collection.update(
@@ -160,7 +160,11 @@ var insertUsrOnce = function (db, userData, sessionId, callback) {
     {
       $set: {
         joinedTime: now.format("YYYY-MM-DD HH:mm:ss Z"),
-        sessionId: sessionId
+        sessionId: sessionId,
+        
+      },
+      $setOnInsert:{
+        scores: initScores
       }
     },
     { upsert: true }, function (err, result) {
@@ -214,9 +218,14 @@ var filterUserScoresByName = function (idToken, callback) {
       { sessionId: idToken },
     ).toArray((err, result) => {
       assert.equal(err, null);
-      console.log(result[0].scores);
-      db.close();
-      callback(result[0].scores);
+      if(result[0].scores){
+        console.log(result[0].scores);
+        db.close();
+        callback(result[0].scores);
+      }else{
+        callback({status:"no query result!!"})
+      }
+      
     });
   });
 }
