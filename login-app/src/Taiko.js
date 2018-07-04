@@ -17,7 +17,7 @@ import Input from './component/Input.js';
 import Explosion from './component/explosion.js';
 import Score from './component/Score.js';
 var apiServerURL = 'http://webdemo.nctu.me:5000';
-apiServerURL = 'http://localhost:5000';
+//apiServerURL = 'http://localhost:5000';
 
 
 class Taiko extends Component {

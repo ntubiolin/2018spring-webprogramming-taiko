@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 var apiServerURL = 'http://webdemo.nctu.me:5000';
-apiServerURL = 'http://localhost:5000';
+//apiServerURL = 'http://localhost:5000';
 
 class Login extends Component {
   constructor(props) {

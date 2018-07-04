@@ -17,7 +17,7 @@ import Oni from './img/ico_difficulty_4.png';
 import goldCrown from './img/goldCrown.png';
 import silverCrown from './img/silverCrown.png';
 var apiServerURL = 'http://webdemo.nctu.me:5000';
-apiServerURL = 'http://localhost:5000';
+//apiServerURL = 'http://localhost:5000';
 
 function throttle(callback, limit) {
   let wait = false;
