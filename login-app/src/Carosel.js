@@ -5,7 +5,6 @@ import './carousel.css';
 import './animation.css';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactAudioPlayer from 'react-audio-player';
-import { Throttle } from 'react-throttle';
 import {
   // BrowserRouter as Router,
   // Route,
@@ -39,6 +38,8 @@ class Carousel extends Component {
     this.rightClick = this.moveRight.bind(this);
     this.leftClick = this.moveLeft.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.rightClick = throttle(this.rightClick, 400);
+    this.leftClick = throttle(this.leftClick, 400);
   }
 
   componentDidMount() {
@@ -162,19 +163,15 @@ class Carousel extends Component {
       <div id="carousel" className="noselect">
         <ReactAudioPlayer src="ka.wav" id="audio-ka" />
         <ReactAudioPlayer src="don.wav" id="audio-don" />
-        <Throttle time="400" handler="onClick">
-          <div role="button" tabIndex="0" className="arrow arrow-left" onClick={this.leftClick}>
-            &#9668;
-          </div>
-        </Throttle>
+        <div role="button" tabIndex="0" className="arrow arrow-left" onClick={this.leftClick}>
+          &#9668;
+        </div>
         <ReactCSSTransitionGroup transitionName={this.state.direction} transitionEnter={false} transitionLeave={false}>
           {this.listItems()}
         </ReactCSSTransitionGroup>
-        <Throttle time="400" handler="onClick">
-          <div role="button" tabIndex="0" className="arrow arrow-right" onClick={this.rightClick}>
-            &#9658;
-          </div>
-        </Throttle>
+        <div role="button" tabIndex="0" className="arrow arrow-right" onClick={this.rightClick}>
+          &#9658;
+        </div>
       </div>
     );
   }
