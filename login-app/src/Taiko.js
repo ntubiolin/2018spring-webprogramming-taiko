@@ -25,8 +25,8 @@ class Taiko extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: this.props.location.package.userName,
-            sessionKey: this.props.location.package.sessionKey,
+            userName: this.props.location.package.userInfo.userName,
+            sessionKey: this.props.location.package.userInfo.sessionKey,
             songID: this.props.location.package.songID,
             score: 0,
             soul: 0,
@@ -365,6 +365,7 @@ class Taiko extends Component {
             return (<Redirect to={
                 {
                     pathname: '/menu',
+                    package: this.props.location.package.userInfo
                 }
             }/>);
         }
