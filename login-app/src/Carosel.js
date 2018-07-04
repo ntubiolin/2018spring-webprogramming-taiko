@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment, max-len, prefer-template, no-console, jsx-a11y/click-events-have-key-events */
 
 import React, { Component } from 'react';
-import './carousel.css';
 import './animation.css';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactAudioPlayer from 'react-audio-player';
@@ -40,17 +39,18 @@ class Carousel extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.rightClick = throttle(this.rightClick, 400);
     this.leftClick = throttle(this.leftClick, 400);
+    this.handleKeyPress = throttle(this.handleKeyPress, 400);
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', throttle(this.handleKeyPress, 400), false);
+    document.addEventListener('keydown', this.handleKeyPress, false);
     fetch('http://webdemo.nctu.me:5000/songList')
       .then(response => response.json())
       .then(json => this.setState({ items: json }));
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', throttle(this.handleKeyPress, 400), false);
+    document.removeEventListener('keydown', this.handleKeyPress, false);
   }
 
   // generateItems() {
