@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment, max-len, prefer-template, no-console, jsx-a11y/click-events-have-key-events, no-underscore-dangle */
-
+var apiServerURL = 'http://webdemo.nctu.me:5000';
+apiServerURL = 'http://localhost:5000';
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactAudioPlayer from 'react-audio-player';
@@ -53,11 +54,11 @@ class Carousel extends Component {
     const test = { id_token: this.props.userInfo.sessionKey };
 
     document.addEventListener('keydown', this.handleKeyPress, false);
-    fetch('http://webdemo.nctu.me:5000/songList')
+    fetch(apiServerURL+ '/songList')
       .then(response => response.json())
       .then(json => this.setState({ items: json }))
       .then(() => {
-        fetch('http://webdemo.nctu.me:5000/userScores', {
+        fetch(apiServerURL + '/userScores', {
           method: 'POST',
           body: JSON.stringify(test),
           headers: { 'Content-Type': 'application/json' },
