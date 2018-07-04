@@ -94,38 +94,7 @@ app.post('/scoreSubmission', (req, res) => {
     res.send(result);
   });
 });
-//UselessAPI
-app.get('/posts', (req, res) => {
-  console.log(">>> Retreving posts written by " + req.query.name);
-  console.log(req.query);
-  MongoClient.connect(DB_URL, function (err, db) {
-    assert.equal(null, err);
-    console.log("Connected successfully to server");
-    filterPostsByName(db, req.query.name, (posts) => {
-      let returnJson = { myPostStatus: 'success', posts: posts[0].post };//XXX: [0].post is odd
-      //console.log(">>> registration return obj:");
-      console.log(returnJson);
-      res.send(returnJson)
-      db.close();
-    })
-  });
-});
-//useless API
-app.get('/users', (req, res) => {
-  console.log(">>> Retreving all users");
-  MongoClient.connect(DB_URL, function (err, db) {
-    assert.equal(null, err);
-    console.log("Connected successfully to server");
-    getUserList(db, (names) => {
-      //names = res.json(names)
-      let returnJson = { getUserListStatus: 'success', names: names };//XXX: Failed post insertion is not handled
-      console.log(">>> userList return obj:");
-      console.log(names);
-      res.send(returnJson)
-      db.close();
-    })
-  });
-});
+
 app.post('/registration/', (req, res) => {
   //console.log(JSON.parse(req.body));
   //  console.log(req.body);
@@ -179,31 +148,7 @@ app.post('/registration/', (req, res) => {
     });
 
 });
-//uselessApi
-app.post('/postSubmission/', (req, res) => {
-  console.log(">>> Receive postSubmission");
-  console.log(req.body);
-  MongoClient.connect(DB_URL, function (err, db) {
-    assert.equal(null, err);
-    console.log("Connected successfully to server");
-    let post = {
-      author: req.body.author,
-      title: req.body.title,
-      content: req.body.content,
-      createdTime: now.format("YYYY-MM-DD HH:mm:ss Z"),
-      postId: req.body.generate_post_id
-    }
-    let sessionId = req.body.sessionId;
-    insertPost(db, sessionId, post, () => {
-      let returnJson = { submissionStatus: 'success' };//XXX: Failed post insertion is not handled
-      //console.log(">>> registration return obj:");
-      //console.log(returnJson);
-      res.send(returnJson)
-      db.close();
-    })
-  });
 
-});
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 var insertUsrOnce = function (db, userData, sessionId, callback) {
@@ -289,6 +234,7 @@ var getSongList = function (callback) {
       assert.equal(err, null);
       console.log(result);
       db.close();
+      result = result.sort(function (a, b) { return (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0); });
       callback(result);
     });
   });

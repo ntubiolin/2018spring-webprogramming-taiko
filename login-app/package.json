@@ -9,7 +9,10 @@
     "react-dom": "^16.4.0",
     "react-google-login": "^3.2.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "pixi-layers": "^0.1.9",
+    "pixi-sound": "^2.0.2",
+    "pixi.js": "^4.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,6 +26,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.0",
     "eslint-plugin-react": "^7.10.0",
+    "jconv": "^0.1.5",
     "react-router": "^4.3.1"
   },
   "eslintConfig": {
