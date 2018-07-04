@@ -72,7 +72,7 @@ class Carousel extends Component {
 
   listItems() {
     const items = [];
-    // console.log(this.state.active);
+    console.log(this.state.items);
     const totalSongs = (this.state.items.length > 11) ? 11 : this.state.items.length;
     const startLevel = (totalSongs > 11) ? -5 : this.state.active - Math.floor((totalSongs - 1) / 2);
     // console.log('list from ' + startLevel + 'to ' + (startLevel + totalSongs - 1));
@@ -161,8 +161,9 @@ class Carousel extends Component {
     }
     return (
       <div id="carousel" className="noselect">
-        <ReactAudioPlayer src="ka.wav" id="audio-ka" />
-        <ReactAudioPlayer src="don.wav" id="audio-don" />
+        <ReactAudioPlayer src="ka.wav" id="audio-ka" volume={0.5} />
+        <ReactAudioPlayer src="don.wav" id="audio-don" volume={0.5} />
+        <ReactAudioPlayer src={this.state.items[this.state.active].file} autoPlay />
         <div role="button" tabIndex="0" className="arrow arrow-left" onClick={this.leftClick}>
           &#9668;
         </div>
@@ -192,7 +193,7 @@ function MyItem(props) {
         </span>
       </div>
       {(props.level === 0 && props.desc.length > 0) ? <Description desc={props.desc} /> : '' }
-      {(props.level === 0) ? <ReactAudioPlayer src="君の知らない物語.mp3" autoPlay /> : '' }
+      {/* {(props.level === 0) ? <ReactAudioPlayer src={props.item.file} autoPlay /> : '' } */}
       {(props.level === 0) ? <Description desc={props.item.course + props.item.file + props.item.level} /> : '' }
     </div>
   );
