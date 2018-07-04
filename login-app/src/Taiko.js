@@ -365,7 +365,7 @@ class Taiko extends Component {
             return (<Redirect to={
                 {
                     pathname: '/menu',
-                    package: this.props.location.package.userInfo
+                    state: { userInfo: this.props.location.package.userInfo }
                 }
             }/>);
         }
