@@ -68,9 +68,12 @@ class Carousel extends Component {
             for (let i = 0; i < this.state.items.length; i += 1) {
               const index = a.findIndex(element => element.songId === this.state.items[i]._id);
               this.state.items[i].clearState = a[index].clear_state;
+              this.state.items[i].highScore = a[index].score;
             }
           });
       });
+
+    this.listItems();
   }
 
   // const clearState = this.state.scores.find(element => element.songID === props.item._id);
@@ -210,7 +213,8 @@ function MyItem(props) {
 
   return (
     <div style={{ left: leftOffset + '%', width: setWidth + '%' }} className={className}>
-      <Crown clearState={props.item.clearState} />
+      <Crown clearState={props.item.clearState} highScore={props.item.highScore} />
+      {(props.level === 0) ? <Highscore highScore={props.item.highScore} /> : '' }
       <div className="song-wrapper">
         <div className="song-name">
           <span className="stroke">
@@ -227,17 +231,28 @@ function MyItem(props) {
   );
 }
 
+function Highscore(props) {
+  return (
+    <div className="high-score">
+      <div>自己ベスト</div>
+      <div className="score">{props.highScore}</div>
+    </div>
+  );
+}
+
 function Crown(props) {
   if (props.clearState === 2) {
     return (
       <div className="crown">
         <img src={goldCrown} alt="goldCrown" />
+        {props.highScore}
       </div>
     );
   } else if (props.clearState === 1) {
     return (
       <div className="crown">
         <img src={silverCrown} alt="silverCrown" />
+        {props.highScore}
       </div>
     );
   }

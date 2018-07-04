@@ -92,7 +92,7 @@ class Login extends Component {
             <div className="col-lg-8 my-auto col-centered">
               <div className="card col-md-5 mx-auto">
                 <div className="card-body">
-                  <h1 className="card-title">太鼓達人</h1>
+                  <h1 className="card-title">大鼓の達人</h1>
                   <GoogleLogin
                     clientId="996100624897-1o5d50v1lnk813m8vu1q71h5anov542v.apps.googleusercontent.com"
                     onSuccess={this.responseGoogle}

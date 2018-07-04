@@ -338,6 +338,30 @@ body {
 	margin-top: -2.3rem;
 }
 
+.high-score {
+	position: absolute;
+	width: 300px;
+	height: 6rem;
+	background-color: white;
+	border: 5px solid black;
+	border-radius: 2rem;
+	top: 35%;
+	z-index: 100000;
+	right: -400px;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: black;
+}
+
+.score {
+	margin-top: 0.2rem;
+	padding: 0.2rem 1rem;
+	background-color: rgb(255, 248, 205);
+}
+
 .song-wrapper {
 	display: flex;
 	flex-direction: row-reverse;
