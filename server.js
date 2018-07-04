@@ -292,7 +292,7 @@ var filterUserScoresByName = function (idToken, callback) {
         db.close();
         callback(result[0].scores);
       }else{
-        callback({status: sji })
+        callback({ status: "filterUserScoresByName failed" })
       }
       
     });
