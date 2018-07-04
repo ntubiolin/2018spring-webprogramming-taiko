@@ -125,7 +125,7 @@ body,
 }
 
 .footer-left {
-	 background: url("pattern-5.png") repeat -65px 0;
+	 background: url("img/pattern-5.png") repeat -65px 0;
 	border: 6px outset #ff936c;
 	/* background: linear-gradient(to bottom right, #ec4b1b, #fa865b); */
 	background-color: #ec4b1b;
@@ -138,7 +138,7 @@ body,
 }
 
 .footer-right {
-	background: url("pattern-5.png") repeat -130px 0;
+	background: url("img/pattern-5.png") repeat -130px 0;
 	border: 6px outset #8fd7de;
 	/* background: linear-gradient(to bottom right, #51b2b9, #8fd7de); */
 	background-color: #51b2b9;
@@ -149,7 +149,7 @@ body,
 .nametag {
 	height: 4rem;
 	border-radius: 2rem;
-	background: url("wood.jpg") repeat 0 0;
+	background: url("img/wood.jpg") repeat 0 0;
 	background-color: white;
 	border: 3px solid black;
 	margin-left: 2rem;
@@ -182,7 +182,7 @@ body,
 }
 
 body {
-	background: url("background.png") repeat 0 0;
+	background: url("img/background.png") repeat 0 0;
 	width: 100%;
 	margin: 0;
 	animation: slide 20s linear infinite;
@@ -210,9 +210,6 @@ body {
 	right: 0;
 	top: 0;
 	bottom: 0;
-
-	background: url("background.png") repeat 0 0;
-	animation: slide 20s linear infinite;
 }
 
 .arrow {

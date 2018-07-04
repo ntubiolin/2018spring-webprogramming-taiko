@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment, max-len, prefer-template, no-console, jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment, max-len, prefer-template, no-console, jsx-a11y/click-events-have-key-events, no-underscore-dangle */
 
 import React, { Component } from 'react';
-import './animation.css';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactAudioPlayer from 'react-audio-player';
 import {
@@ -11,6 +10,7 @@ import {
   Redirect,
   // withRouter,
 } from 'react-router-dom';
+import './animation.css';
 
 function throttle(callback, limit) {
   let wait = false;
@@ -179,7 +179,7 @@ class Carousel extends Component {
 
 function MyItem(props) {
   const className = 'myitem category' + props.category;
-  const leftOffset = (props.level < 0) ? -3.90625 + 23.4375 + (5 - props.level) * 7.8125 : -3.90625 + (5 - props.level) * 7.8125;
+  const leftOffset = (props.level < 0) ? -3.90625 + 23.4375 + ((5 - props.level) * 7.8125) : -3.90625 + ((5 - props.level) * 7.8125);
   const setWidth = (props.level === 0) ? 29.6875 : 6.25;
   return (
     <div style={{ left: leftOffset + '%', width: setWidth + '%' }} className={className}>
@@ -203,7 +203,6 @@ function Description(props) {
     <div className="description song-name">
       <span className="stroke">
         {props.desc}
-        
       </span>
       <span className="no-stroke">
         {props.desc}

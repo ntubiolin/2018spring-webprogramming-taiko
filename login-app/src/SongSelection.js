@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 
 import Carousel from './Carosel';
-import avatar1 from './playerchar_p1_01.png';
-import avatar2 from './playerchar_p1_02.png';
+import avatar1 from './img/playerchar_p1_01.png';
+import avatar2 from './img/playerchar_p1_02.png';
 import './carousel.css';
 
 const tempsongs = [

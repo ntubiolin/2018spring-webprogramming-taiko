@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const file = './src/sotsuomeshiki.tja';
+const file = './public/tja/sotsuomeshiki.tja';
 const contents = fs.readFileSync(file, { encoding: 'utf8' });
 
 const output = {
@@ -10,6 +10,7 @@ const output = {
   totalnotes: 0,
   BPM: 0,
   Notes: [],
+  renda: [],
 };
 
 const lines = contents.split(/\r?\n/);
@@ -23,26 +24,53 @@ output.offset = parseFloat(offString);
 const start = lines.findIndex(element => element.startsWith('#START'));
 const end = lines.findIndex(element => element.startsWith('#END'));
 
-let m = 0;
+const NoteLines = [];
+
+let rendaLength = 0;
 for (let index = start + 1; index < end; index += 1) {
-  let element = lines[index];
+  const element = lines[index];
+  if (element.length > 0) {
+    if (element[0] !== '#') {
+      NoteLines.push(element);
+    }
+  }
+}
+
+for (let i = 0; i < NoteLines.length; i += 1) {
+  let element = NoteLines[i];
   element = element.substring(0, element.indexOf(',')); // remove everything after ','
-  element = element.replace(/\D/g, ''); // remove non-numeric
-  if (element.length !== 0) {
-    const multi = 48 / element.length;
-    for (let n = 0; n < element.length; n += 1) {
-      if (element[n] !== '0') {
-        output.Notes.push({
-          types: parseInt(element[n], 10),
-          measure: m,
-          time: n * multi,
-        });
+
+  const multi = 48 / element.length;
+  for (let n = 0; n < element.length; n += 1) {
+    if (element[n] !== '0') {
+      switch (element[n]) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+          output.Notes.push({
+            types: parseInt(element[n], 10),
+            measure: i,
+            time: n * multi,
+          });
+          break;
+        case '5':
+        case '6':
+        case '7':
+          output.renda[rendaLength] = {
+            start: { measure: i, time: n * multi },
+          };
+          break;
+        case '8':
+          output.renda[rendaLength].end = { measure: i, time: n * multi };
+          rendaLength += 1;
+          break;
+        default:
       }
     }
-    m += 1;
   }
 }
 
 output.totalnotes = output.Notes.length;
 
-fs.writeFile('output.json', JSON.stringify(output));
+fs.writeFile('./public/chart/sotsuomeshiki.json', JSON.stringify(output));
