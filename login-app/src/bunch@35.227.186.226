@@ -1,0 +1,27 @@
+import taidata from './public/chart/10tai.json';
+import kdata from './public/chart/kim4ra.json';
+import sdata from './public/chart/sotsuomeshiki.json';
+
+const tempsongs = [
+  {
+    title: '天体観測',
+    desc: '',
+    category: 1,
+    course: 'Hard', level: 4, file: 'music/10tai.ogg',
+    chart: taidata,
+  },
+  {
+    title: '君の知らない物語',
+    desc: '「化物語」より',
+    category: 1,
+    course: 'Easy', level: 3, file: 'music/kim4ra.ogg',
+    chart: kdata,
+  },  
+  {
+    title: 'そつおめしき',
+    desc: 'feat.unmo',
+    category: 1,
+    course: 'Oni', level: 10, file: 'music/sotsuomeshiki.ogg',
+    chart: sdata,
+  },  
+]
