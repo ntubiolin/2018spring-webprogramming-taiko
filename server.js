@@ -234,6 +234,7 @@ var getSongList = function (callback) {
       assert.equal(err, null);
       console.log(result);
       db.close();
+      result = result.sort(function (a, b) { return (a.level > b.level) ? 1 : ((b.level > a.level) ? -1 : 0); });
       callback(result);
     });
   });
@@ -263,7 +264,6 @@ var updateScoreById = (person_id, song_id, score, clear_state, callback)=> {
         assert.equal(err, null);
         db.close();
         console.log(">>> updateSCoreResult:");
-        result = result.sort(function (a, b) { return (a.level > b.level) ? 1 : ((b.level > a.level) ? -1 : 0); });
         console.log(result);
         callback(result);
       });
