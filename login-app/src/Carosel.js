@@ -203,9 +203,11 @@ function Description(props) {
     <div className="description song-name">
       <span className="stroke">
         {props.desc}
+        
       </span>
       <span className="no-stroke">
         {props.desc}
+        &#9733;
       </span>
     </div>
   );
