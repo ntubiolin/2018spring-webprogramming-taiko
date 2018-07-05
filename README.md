@@ -1,4 +1,6 @@
 # 太鼓達人
+![Demo Screenshot1](https://i.imgur.com/NHxUQFc.png)
+![Demo Screenshot2](https://i.imgur.com/qj7h8wf.png)
 ## Table of Contents
 
 - [Installation](#installation)
